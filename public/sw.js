@@ -2,6 +2,7 @@ const staticCacheName = 'static-files'
 const assets = [
     '/',
     '/index.html',
+    '/offline.html'
 ]
 
 self.addEventListener('install', evt => {
