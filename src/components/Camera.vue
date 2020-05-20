@@ -1,8 +1,43 @@
 <template>
   <div>
     <video id="me" class="camera"></video>
-    <img src id="photo" style="width: 100%;" />
-    <button @click="captureImage" class="button">Take a screenshoot!</button>
+    <canvas id="photo" style="width:400px;height:400px"></canvas>
+    <div class="butto">
+      <button id="clear" @click="clearFilter">Clear</button>
+      <button @click="captureImage" class="button">Take a screenshoot!</button>
+      <button id="test">Tillåt Nortiser</button>
+    </div>
+    <div class="filters">
+      <div class="filter">
+        <label for="brightness">Brightness</label>
+        <input
+          type="range"
+          min="-100"
+          max="100"
+          step="1"
+          :value="0"
+          id="brightness"
+          data-filter="brightness"
+          v-on:change="changeBrightness"
+        />
+      </div>
+      <div class="filter">
+        <label for="contrast">Contrast</label>
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="contrast" />
+      </div>
+      <div class="filter">
+        <label for="saturaction">Saturaction</label>
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="saturation" />
+      </div>
+      <div class="filter">
+        <label for="vibrance">Vibrance</label>
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="vibrance" />
+      </div>
+      <div class="filter">
+        <label for="exposure">Exposure</label>
+        <input type="range" min="-100" max="100" step="1" value="0" data-filter="exposure" />
+      </div>
+    </div>
   </div>
 </template>
 
@@ -18,6 +53,26 @@ export default {
     this.getMedia();
   },
   methods: {
+    clearFilter() {
+      document.querySelector("#photo").remove();
+    },
+    renderCaman() {
+      this.Caman("#photo", this.imgUrl, function() {
+        this.render();
+      });
+    },
+    changeBrightness(value) {
+      console.log(value.target.value);
+      this.Caman("#photo", this.imgUrl, function() {
+        if (value > 0 || value < 0) {
+          this.brightness(value.target.value++);
+        } else {
+          this.brightness(value.target.value--);
+        }
+        this.render();
+      });
+    },
+
     async captureImage() {
       console.log(this.stream);
       const mediaTrack = this.stream.getVideoTracks()[0];
@@ -27,23 +82,15 @@ export default {
       console.log(photo);
       const imgUrl = URL.createObjectURL(photo);
       console.log(imgUrl);
-      document.querySelector("#photo").src = imgUrl;
-      // setTimeout(() => {
-      //     document.querySelector("#photo").src = this.imgUrl;
-      //     // renderCaman();
-      //   }, 2000);
+      this.imgUrl = imgUrl;
+
+      document.querySelector("#photo").canvas = imgUrl;
+      document.querySelector("#photo").style.width = "400px";
+      setTimeout(() => {
+        // document.querySelector("#photo").src = this.imgUrl;
+        this.renderCaman();
+      }, 2000);
     },
-    // async captureImage(stream) {
-    //   const mediaTrack = stream.getVideoTracks()[0];
-    //   const captureImg = new ImageCapture(mediaTrack);
-    //   const photo = await captureImg.takePhoto();
-    //   //Gör om den från en blob (binär data) till en url
-    //   this.imgUrl = URL.createObjectURL(photo);
-    //   setTimeout(() => {
-    //     document.querySelector("#photo").src = this.imgUrl;
-    //     // renderCaman();
-    //   }, 2000);
-    // },
 
     async getMedia() {
       try {
@@ -65,5 +112,9 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+canvas {
+  width: 400px;
+  margin: auto;
+}
 </style>

@@ -5,14 +5,14 @@
 </template>
 
 <script>
-import Home from './components/Home.vue'
+import Home from "./components/Home.vue";
 
 export default {
-  name: 'App',
+  name: "App",
   components: {
     Home
   }
-}
+};
 </script>
 
 <style lang="scss">
@@ -29,19 +29,19 @@ export default {
   min-width: 380px;
   border: 1px solid black;
   border-radius: 5px;
-  
 }
-@media screen and (min-width: 768px){
-.wrapper{
-  max-width: 800px;
+canvas {
+  width: 400px;
 }
-
-}
-
-@media screen and (min-width: 1024px){
-.wrapper{
-  max-width: 1200px;
-}
+@media screen and (min-width: 768px) {
+  .wrapper {
+    max-width: 800px;
+  }
 }
 
+@media screen and (min-width: 1024px) {
+  .wrapper {
+    max-width: 1200px;
+  }
+}
 </style>
