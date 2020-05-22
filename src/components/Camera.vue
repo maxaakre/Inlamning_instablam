@@ -1,9 +1,9 @@
 <template>
   <div>
     <video id="me" class="camera"></video>
-    <canvas id="photo" style="width:400px;height:400px"></canvas>
-    <div class="butto">
-      <button id="clear" @click="clearFilter">Clear</button>
+    <!-- <canvas id="photo" style="width:400px;height:400px"></canvas> -->
+    <img src id="photo" />
+    <div class="button">
       <button @click="captureImage" class="button">Take a screenshoot!</button>
       <button id="test">Tillåt Nortiser</button>
     </div>
@@ -46,29 +46,28 @@ export default {
   data() {
     return {
       stream: {},
-      imgUrl: ""
+      imgUrl: "",
+      oldValue: ""
     };
   },
   mounted() {
     this.getMedia();
   },
   methods: {
-    clearFilter() {
-      document.querySelector("#photo").remove();
-    },
     renderCaman() {
       this.Caman("#photo", this.imgUrl, function() {
         this.render();
       });
     },
-    changeBrightness(value) {
-      console.log(value.target.value);
+    changeBrightness(event) {
+      const value = parseInt(event.target.value);
+      console.log(event.target.value);
       this.Caman("#photo", this.imgUrl, function() {
-        if (value > 0 || value < 0) {
-          this.brightness(value.target.value++);
-        } else {
-          this.brightness(value.target.value--);
+        if (value < -10 && value < 10) {
+          this.revert();
         }
+        this.brightness(value - this.oldValue);
+        this.oldValue = value;
         this.render();
       });
     },
@@ -84,7 +83,7 @@ export default {
       console.log(imgUrl);
       this.imgUrl = imgUrl;
 
-      document.querySelector("#photo").canvas = imgUrl;
+      document.querySelector("#photo").src = imgUrl;
       document.querySelector("#photo").style.width = "400px";
       setTimeout(() => {
         // document.querySelector("#photo").src = this.imgUrl;
