@@ -1,8 +1,8 @@
 <template>
   <div>
     <video id="me" class="camera"></video>
-    <!-- <canvas id="photo" style="width:400px;height:400px"></canvas> -->
-    <img src id="photo" />
+    <canvas id="photo"></canvas>
+    <!-- <img src id="photo" /> -->
     <div class="button">
       <button @click="captureImage" class="button">Take a screenshoot!</button>
       <button id="test">Tillåt Nortiser</button>
@@ -192,7 +192,7 @@ export default {
 </script>
 
 <style lang="scss" >
-canvas {
+canvas[style] {
   width: 400px;
   margin: auto;
 }
