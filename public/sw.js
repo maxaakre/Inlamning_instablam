@@ -4,6 +4,7 @@ const assets = ["/", "/index.html", "/offline.html"];
 self.addEventListener("install", (evt) => {
   console.log(self);
   self.skipWaiting();
+  console.log(evt);
   console.log("SW installed at: ", new Date().toLocaleTimeString());
   evt.waitUntil(
     caches.open(staticCacheName).then((cache) => {
@@ -22,10 +23,11 @@ self.addEventListener("fetch", (evt) => {
   if (!navigator.onLine) {
     evt.respondWith(
       caches.match(evt.request).then((cacheRes) => {
-        return cacheRes || fetch(evt.request);
+        return cacheRes;
       })
     );
   } else {
+    updateCache(evt.request);
     console.log("Online!");
   }
 });
@@ -42,6 +44,19 @@ self.addEventListener("push", (event) => {
 const createNotification = (text) => {
   self.registration.showNotification("Detta är en push notise", {
     body: text,
-    icon: "./image/mirrorless126x126.png",
+    icon: "./image/icons/icon192x192.png",
   });
 };
+
+async function updateCache(request) {
+  return fetch(request).then((response) => {
+    //§
+    if (response) {
+      return caches.open(staticCacheName).then((cache) => {
+        return cache.put(request, response.clone()).then(() => {
+          return response;
+        });
+      });
+    }
+  });
+}
