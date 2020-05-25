@@ -26,7 +26,7 @@ export default {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
-  min-width: 380px;
+  min-width: 320px;
   border: 1px solid black;
   border-radius: 5px;
 }
