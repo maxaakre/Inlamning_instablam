@@ -1,81 +1,24 @@
 <template>
   <div>
-    <video id="me" class="camera"></video>
-    <canvas id="photo"></canvas>
-    <a class="download" id="download"></a>
     <div class="button">
       <button @click="captureImage" class="button">Take a screenshoot!</button>
       <button id="test">Tillåt Nortiser</button>
       <button @click="downloadImg">Download photo</button>
+      <button @click="clearButton">Clear</button>
     </div>
-    <div class="filters">
-      <div class="filter">
-        <label for="brightness">Brightness</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          step="1"
-          :value="0"
-          id="brightness"
-          data-filter="brightness"
-          v-on:change="changeBrightness"
-        />
-      </div>
-      <div class="filter">
-        <label for="contrast">Contrast</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          step="1"
-          value="0"
-          data-filter="contrast"
-          v-on:change="changeContrast"
-        />
-      </div>
-      <div class="filter">
-        <label for="saturaction">Saturaction</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          step="1"
-          value="0"
-          data-filter="saturation"
-          v-on:change="changeSaturaction"
-        />
-      </div>
-      <div class="filter">
-        <label for="vibrance">Vibrance</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          step="1"
-          value="0"
-          data-filter="vibrance"
-          v-on:change="changeVibrance"
-        />
-      </div>
-      <div class="filter">
-        <label for="exposure">Exposure</label>
-        <input
-          type="range"
-          min="-100"
-          max="100"
-          step="1"
-          value="0"
-          data-filter="exposure"
-          v-on:change="changeExposure"
-        />
-      </div>
-    </div>
+    <video id="me" class="camera"></video>
+    <canvas id="photo" v-show="imgUrl"></canvas>
+    <a class="download" id="download"></a>
+    <Filters :imgUrl="imgUrl" />
   </div>
 </template>
 
 <script>
+import Filters from "@/components/Filters.vue";
 export default {
+  components: {
+    Filters
+  },
   data() {
     return {
       stream: {},
@@ -87,6 +30,17 @@ export default {
     this.getMedia();
   },
   methods: {
+    clearButton() {
+      if (document.querySelector("canvas") !== null) {
+        document.querySelector("#photo").removeAttribute("data-caman-id");
+        this.renderCaman("#photo", this.imgUrl);
+      }
+    },
+    renderCaman() {
+      this.Caman("#photo", this.imgUrl, function() {
+        this.render();
+      });
+    },
     downloadImg() {
       const canvas = document.querySelector("canvas");
       const img = canvas
@@ -96,72 +50,6 @@ export default {
       link.setAttribute("download", "FiltredImg.png");
       link.setAttribute("href", img);
       link.click();
-    },
-
-    renderCaman() {
-      this.Caman("#photo", this.imgUrl, function() {
-        this.render();
-      });
-    },
-    changeBrightness(event) {
-      const value = parseInt(event.target.value);
-      console.log(event.target.value);
-      this.Caman("#photo", this.imgUrl, function() {
-        if (value < -10 && value < 10) {
-          this.revert();
-        }
-        this.brightness(value - this.oldValue);
-        this.oldValue = value;
-        this.render();
-      });
-    },
-    changeContrast(event) {
-      const value = parseInt(event.target.value);
-      console.log(event.target.value);
-      this.Caman("#photo", this.imgUrl, function() {
-        if (value < -10 && value < 10) {
-          this.revert();
-        }
-        this.contrast(value - this.oldValue);
-        this.oldValue = value;
-        this.render();
-      });
-    },
-    changeSaturaction(event) {
-      const value = parseInt(event.target.value);
-      console.log(event.target.value);
-      this.Caman("#photo", this.imgUrl, function() {
-        if (value < -10 && value < 10) {
-          this.revert();
-        }
-        this.saturation(value - this.oldValue);
-        this.oldValue = value;
-        this.render();
-      });
-    },
-    changeVibrance(event) {
-      const value = parseInt(event.target.value);
-      console.log(event.target.value);
-      this.Caman("#photo", this.imgUrl, function() {
-        if (value < -10 && value < 10) {
-          this.revert();
-        }
-        this.vibrance(value - this.oldValue);
-        this.oldValue = value;
-        this.render();
-      });
-    },
-    changeExposure(event) {
-      const value = parseInt(event.target.value);
-      console.log(event.target.value);
-      this.Caman("#photo", this.imgUrl, function() {
-        if (value < -10 && value < 10) {
-          this.revert();
-        }
-        this.exposure(value - this.oldValue);
-        this.oldValue = value;
-        this.render();
-      });
     },
 
     async captureImage() {
@@ -176,7 +64,7 @@ export default {
       this.imgUrl = imgUrl;
 
       document.querySelector("#photo").src = imgUrl;
-      setTimeout(() => {
+      this.$refs.setTimeout(() => {
         this.renderCaman();
       }, 2000);
     },
@@ -226,7 +114,7 @@ button {
   }
 }
 .filters {
-  width: 80%;
+  width: 100%;
   margin: auto;
   padding: 1rem;
   label {
@@ -240,7 +128,7 @@ button {
 @media screen and (min-width: 768px) {
   #me {
     width: 700px;
-    height: 400px;
+    height: 300px;
   }
   button {
     margin: auto;
@@ -249,7 +137,7 @@ button {
 @media screen and (min-width: 1024px) {
   #me {
     width: 800px;
-    height: 500px;
+    height: 400px;
   }
   canvas {
     margin: 1rem auto;

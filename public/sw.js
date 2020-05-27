@@ -27,8 +27,11 @@ self.addEventListener("fetch", (evt) => {
       })
     );
   } else {
-    updateCache(evt.request);
-    console.log("Online!");
+    if (evt.request.method === "GET") {
+      return updateCache(evt.request);
+    } else {
+      return fetch(evt.request);
+    }
   }
 });
 
@@ -42,15 +45,14 @@ self.addEventListener("push", (event) => {
 
 //Skapar en notifikation med Web notifications API
 const createNotification = (text) => {
-  self.registration.showNotification("Detta är en push notise", {
+  self.registration.showNotification("Detta är en pushnotise", {
     body: text,
-    icon: "./image/icons/icon192x192.png",
+    icon: "./images/icons/icon192x192.png",
   });
 };
 
-async function updateCache(request) {
+function updateCache(request) {
   return fetch(request).then((response) => {
-    //§
     if (response) {
       return caches.open(staticCacheName).then((cache) => {
         return cache.put(request, response.clone()).then(() => {
