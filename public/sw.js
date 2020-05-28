@@ -1,6 +1,6 @@
 const staticCacheName = "static-files";
 const assets = ["/", "/index.html", "/offline.html"];
-
+// Installing SW
 self.addEventListener("install", (evt) => {
   console.log(self);
   self.skipWaiting();
@@ -12,12 +12,12 @@ self.addEventListener("install", (evt) => {
     })
   );
 });
-
+// activating SW
 self.addEventListener("activate", (event) => {
   self.skipWaiting();
   console.log("SW activated at: ", new Date().toLocaleTimeString());
 });
-
+// Fetching SW
 self.addEventListener("fetch", (evt) => {
   console.log(evt.request.url);
   if (!navigator.onLine) {
@@ -41,7 +41,7 @@ self.addEventListener("fetch", (evt) => {
   }
 });
 
-//Lyssnar efter push notiser
+//Listen to pushnotices
 self.addEventListener("push", (event) => {
   console.log("push");
   if (event.data) {
@@ -49,7 +49,7 @@ self.addEventListener("push", (event) => {
   }
 });
 
-//Skapar en notifikation med Web notifications API
+// Creat a notification with notification API
 const createNotification = (text) => {
   self.registration.showNotification("Detta är en pushnotise", {
     body: text,

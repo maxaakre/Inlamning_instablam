@@ -30,17 +30,7 @@ export default {
     this.getMedia();
   },
   methods: {
-    clearButton() {
-      if (document.querySelector("canvas") !== null) {
-        document.querySelector("#photo").removeAttribute("data-caman-id");
-        this.renderCaman("#photo", this.imgUrl);
-      }
-    },
-    renderCaman() {
-      this.Caman("#photo", this.imgUrl, function() {
-        this.render();
-      });
-    },
+    // Downloading img
     downloadImg() {
       const canvas = document.querySelector("canvas");
       const img = canvas
@@ -51,7 +41,20 @@ export default {
       link.setAttribute("href", img);
       link.click();
     },
-
+    // Clear filters from Img
+    clearButton() {
+      if (document.querySelector("canvas") !== null) {
+        document.querySelector("#photo").removeAttribute("data-caman-id");
+        this.renderCaman("#photo", this.imgUrl);
+      }
+    },
+    // Aplying caman on img
+    renderCaman() {
+      this.Caman("#photo", this.imgUrl, function() {
+        this.render();
+      });
+    },
+    // Taking photo
     async captureImage() {
       console.log(this.stream);
       const mediaTrack = this.stream.getVideoTracks()[0];
@@ -62,14 +65,12 @@ export default {
       const imgUrl = URL.createObjectURL(photo);
       console.log(imgUrl);
       this.imgUrl = imgUrl;
-
-      // document.querySelector("#photo").src = imgUrl;
       this.$refs.photo = imgUrl;
       setTimeout(() => {
         this.renderCaman();
       }, 2000);
     },
-
+    // Video media stram
     async getMedia() {
       try {
         this.stream = await navigator.mediaDevices.getUserMedia({
@@ -91,9 +92,9 @@ export default {
 
 <style lang="scss" >
 button {
+  font-family: "Roboto Mono", monospace;
   padding: 1rem;
   width: 200px;
-  // margin: 1rem auto;
   margin: 0.5rem;
   border-radius: 5px;
   color: white;
