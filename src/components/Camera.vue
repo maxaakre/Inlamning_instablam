@@ -3,7 +3,7 @@
     <div class="button">
       <button id="test" class="controll">Tillåt Nortiser</button>
       <button @click="downloadImg" class="controll">Download photo</button>
-      <button @click="clearButton" class="controll">Clear</button>
+      <button @click="clearButton" class="controll">Clear filter</button>
       <button @click="captureImage" class="controll">Take a screenshoot!</button>
     </div>
     <video id="me" class="camera"></video>
@@ -149,6 +149,7 @@ canvas[style] {
     max-height: 500px !important;
   }
 }
+
 @media screen and (min-width: 1024px) {
   #me {
     width: 800px;
