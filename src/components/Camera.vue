@@ -1,7 +1,7 @@
 <template>
   <div>
-    <div class="button">
-      <button id="test" class="controll">Tillåt Nortiser</button>
+    <div class="button" tabindex="0">
+      <button id="test" class="controll" tabindex="0">Allow notifications</button>
       <button @click="downloadImg" class="controll">Download photo</button>
       <button @click="clearButton" class="controll">Clear filter</button>
       <button @click="captureImage" class="controll">Take a screenshoot!</button>
@@ -97,8 +97,8 @@ button {
   width: 200px;
   margin: 0.5rem;
   border-radius: 5px;
-  color: white;
-  background: black;
+  color: black;
+  background: lightgrey;
   font-size: 14px;
   &:hover {
     background: white;

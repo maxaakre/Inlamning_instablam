@@ -2,7 +2,7 @@
   <div class="wrapper">
     <div class="content">
       <p class="hide">
-        <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
+        <a class="fav" href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a>
       </p>
       <img src="../../public/images/icons/icon192x192.png" class="camera" alt />
       <h1>Take a photo and add some filter!</h1>
@@ -63,7 +63,10 @@ footer {
   }
 }
 @media screen and (min-width: 768px) {
-  a {
+  .hide {
+    display: unset;
+  }
+  .fav {
     color: black;
     margin: 1rem;
     text-decoration: none;
@@ -75,12 +78,11 @@ footer {
 }
 
 @media screen and (min-width: 1024px) {
+  .fav {
+    font-size: 30px;
+  }
   .controll {
     margin: 1rem 0;
-    // padding: 1rem;
-  }
-  footer {
-    display: none;
   }
 }
 </style>
