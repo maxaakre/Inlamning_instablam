@@ -28,25 +28,7 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
-
-  // min-width: 320px;
-  border-radius: 5px;
   height: 100vh;
-}
-canvas {
-  width: 400px;
-}
-@media screen and (min-width: 768px) {
-  .wrapper {
-    max-width: 800px;
-    height: 100vh;
-  }
-}
-
-@media screen and (min-width: 1024px) {
-  .wrapper {
-    max-width: 1200px;
-    height: 100vh;
-  }
+  width: 100%;
 }
 </style>

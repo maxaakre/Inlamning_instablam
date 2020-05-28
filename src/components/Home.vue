@@ -21,32 +21,38 @@ export default {
 };
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
+
 <style lang="scss">
 .wrapper {
   width: 100%;
   height: 100vh;
+  margin: auto;
   h1 {
     margin: auto;
+    padding: 1rem;
   }
 }
 .content {
   display: flex;
   flex-flow: column;
+  width: 100%;
 }
 footer {
   background: black;
-  height: 30px;
+
   padding: 2rem;
   margin: auto;
   width: 100%;
 
   a {
+    height: 30px;
     color: white;
+    text-decoration: none;
+    font-size: 30px;
   }
 }
-@media screen and (min-width: 768px) {
-}
-@media screen and (min-width: 1024px) {
-}
+// @media screen and (min-width: 768px) {
+// }
+// @media screen and (min-width: 1024px) {
+// }
 </style>

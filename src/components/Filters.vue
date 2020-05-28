@@ -132,5 +132,31 @@ export default {
 };
 </script>
 
-<style lang="scss" scoped>
+<style lang="scss" >
+.filters {
+  width: 100%;
+  margin: auto;
+  padding: 1rem;
+  label {
+    margin: auto;
+    padding: 1.5rem;
+  }
+  filter {
+    width: 200px;
+  }
+}
+@media screen and (min-width: 768px) {
+  .filters {
+    width: 100%;
+  }
+  input {
+    width: 500px;
+    justify-items: center;
+  }
+  label {
+    font-size: 30px;
+  }
+}
+@media screen and (min-width: 1024px) {
+}
 </style>

@@ -1,10 +1,10 @@
 <template>
   <div>
     <div class="button">
-      <button @click="captureImage" class="button">Take a screenshoot!</button>
-      <button id="test">Tillåt Nortiser</button>
-      <button @click="downloadImg">Download photo</button>
-      <button @click="clearButton">Clear</button>
+      <button id="test" class="controll">Tillåt Nortiser</button>
+      <button @click="downloadImg" class="controll">Download photo</button>
+      <button @click="clearButton" class="controll">Clear</button>
+      <button @click="captureImage" class="controll">Take a screenshoot!</button>
     </div>
     <video id="me" class="camera"></video>
     <canvas id="photo" v-show="imgUrl"></canvas>
@@ -63,8 +63,9 @@ export default {
       console.log(imgUrl);
       this.imgUrl = imgUrl;
 
-      document.querySelector("#photo").src = imgUrl;
-      this.$refs.setTimeout(() => {
+      // document.querySelector("#photo").src = imgUrl;
+      this.$refs.photo = imgUrl;
+      setTimeout(() => {
         this.renderCaman();
       }, 2000);
     },
@@ -91,13 +92,12 @@ export default {
 <style lang="scss" >
 #me {
   width: 300px;
-  padding: 1rem;
-  margin: auto;
+
+  margin: 1rem auto;
 }
 canvas {
   max-width: 380px;
   max-height: 200px;
-  padding: 1rem auto;
 }
 button {
   padding: 1rem;
@@ -126,9 +126,20 @@ button {
   }
 }
 @media screen and (min-width: 768px) {
+  .controll {
+    font-size: 30px;
+    width: 100%;
+    padding: 1rem;
+    margin: auto;
+  }
   #me {
     width: 700px;
-    height: 300px;
+    height: 500px;
+  }
+  canvas {
+    margin: auto;
+    max-width: 800px !important;
+    max-height: 500px !important;
   }
   button {
     margin: auto;
@@ -138,10 +149,11 @@ button {
   #me {
     width: 800px;
     height: 400px;
+    margin: 2rem;
   }
-  canvas {
-    margin: 1rem auto;
-  }
+  // canvas {
+  //   margin: auto;
+  // }
 }
 
 canvas[style] {
