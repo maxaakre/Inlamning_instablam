@@ -157,6 +157,4 @@ export default {
     font-size: 30px;
   }
 }
-@media screen and (min-width: 1024px) {
-}
 </style>

@@ -90,15 +90,6 @@ export default {
 </script>
 
 <style lang="scss" >
-#me {
-  width: 300px;
-
-  margin: 1rem auto;
-}
-canvas {
-  max-width: 380px;
-  max-height: 200px;
-}
 button {
   padding: 1rem;
   width: 200px;
@@ -113,6 +104,18 @@ button {
     color: black;
   }
 }
+#me {
+  width: 300px;
+
+  margin: 1rem auto;
+}
+
+canvas[style] {
+  max-width: 300px;
+  max-height: 200px;
+  margin: auto;
+}
+
 .filters {
   width: 100%;
   margin: auto;
@@ -126,6 +129,9 @@ button {
   }
 }
 @media screen and (min-width: 768px) {
+  button {
+    margin: auto;
+  }
   .controll {
     font-size: 30px;
     width: 100%;
@@ -141,9 +147,6 @@ button {
     max-width: 800px !important;
     max-height: 500px !important;
   }
-  button {
-    margin: auto;
-  }
 }
 @media screen and (min-width: 1024px) {
   #me {
@@ -151,13 +154,5 @@ button {
     height: 400px;
     margin: 2rem;
   }
-  // canvas {
-  //   margin: auto;
-  // }
-}
-
-canvas[style] {
-  max-width: 300px;
-  margin: auto;
 }
 </style>

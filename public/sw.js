@@ -22,11 +22,17 @@ self.addEventListener("fetch", (evt) => {
   console.log(evt.request.url);
   if (!navigator.onLine) {
     evt.respondWith(
-      caches.match(evt.request).then((cacheRes) => {
-        return cacheRes;
+      caches.match(evt.request).then((response) => {
+        console.log("RESPONSE: ", response);
+        if (response) {
+          return response;
+        } else {
+          return caches.match(new Request("offline.html"));
+        }
       })
     );
   } else {
+    console.log("Online!");
     if (evt.request.method === "GET") {
       return updateCache(evt.request);
     } else {
