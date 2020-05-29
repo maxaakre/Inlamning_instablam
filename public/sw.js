@@ -56,7 +56,7 @@ const createNotification = (text) => {
     icon: "./images/icons/icon192x192.png",
   });
 };
-
+// Update cache
 function updateCache(request) {
   return fetch(request).then((response) => {
     if (response) {

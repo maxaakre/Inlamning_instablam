@@ -134,9 +134,9 @@ canvas[style] {
     margin: auto;
   }
   .controll {
-    font-size: 30px;
+    font-size: 20px;
     width: 100%;
-    padding: 1rem;
+    padding: 1.3rem;
     margin: auto;
   }
   #me {
@@ -144,7 +144,7 @@ canvas[style] {
     height: 500px;
   }
   canvas {
-    margin: auto;
+    margin: 1rem auto;
     max-width: 800px !important;
     max-height: 500px !important;
   }
@@ -152,8 +152,8 @@ canvas[style] {
 
 @media screen and (min-width: 1024px) {
   #me {
-    width: 800px;
-    height: 400px;
+    width: 900px;
+    height: 500px;
     margin: 2rem;
   }
 }

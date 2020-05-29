@@ -27,6 +27,9 @@ export default {
 
 
 <style lang="scss">
+p {
+  display: none;
+}
 .wrapper {
   width: 100%;
   height: 100vh;
@@ -45,12 +48,11 @@ h1 {
   padding: 1rem;
 }
 .camera {
-  width: 100px;
+  width: 70px;
   margin: auto;
 }
 footer {
   background: black;
-
   padding: 2rem;
   margin: auto;
   width: 100%;
@@ -67,10 +69,13 @@ footer {
     display: unset;
   }
   .fav {
-    color: black;
-    margin: 1rem;
+    font-size: 30px;
+    display: block;
     text-decoration: none;
-    margin: 1rem;
+    color: black;
+  }
+  h1 {
+    padding: 0;
   }
   footer {
     display: none;
@@ -79,10 +84,13 @@ footer {
 
 @media screen and (min-width: 1024px) {
   .fav {
-    font-size: 30px;
+    display: block;
   }
   .controll {
-    margin: 1rem 0;
+    margin: 0.5rem 0;
+  }
+  footer {
+    display: none;
   }
 }
 </style>
