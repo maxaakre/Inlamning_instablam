@@ -57,7 +57,7 @@ const createNotification = (text) => {
   });
 };
 // Update cache
-function updateCache(request) {
+async function updateCache(request) {
   return fetch(request).then((response) => {
     if (response) {
       return caches.open(staticCacheName).then((cache) => {
